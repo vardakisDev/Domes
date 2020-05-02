@@ -57,6 +57,35 @@ int Functions::CROWDED_PLACES(vector<LinkedList<Cordinates *> *> &Users, Cordina
 
 void Functions::POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &Users, LinkedList<Cordinates *> *&UserTrajectory, vector<bool> ListOfCovid19)
 {
+    for (int i = 0; i < MAX_USER; i++)
+    {
+        int time = 0;
+        Node<Cordinates *> *head = UserTrajectory->head;
+        Node<Cordinates *> *infectedNode = Users[i]->head;
+        if (Users[i]->head == head)
+        {
+            i++;
+        }
+        else
+        {
+            while (head)
+            {
+                time = 0;
+                while (deFineCircle(infectedNode->data, head->data))
+                {
+                    time += 30;
+                    infectedNode = infectedNode->next;
+                    head = head->next;
+                    if (time == 900)
+                    {
+                        cout << "User infected by user" << i << endl;
+                        return;
+                    }
+                }
+                head = head->next;
+            }
+        }
+    }
 }
 
 void Functions::SUMMARIZE_TRAJECTORY(LinkedList<Cordinates *> *&UserTrajectory)

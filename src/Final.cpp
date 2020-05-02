@@ -12,10 +12,9 @@ int main()
     for (int x = 0; x < 2; x++)
     {
         Users.push_back(simulation.GenerateDay());
-        3
     }
 
-    Users[1][1]->pointerprint();
+    functions.POSSIBLE_COVID_19_INFECTION(Users[0], Users[0][0], ListOfCovid19);
 }
 
 //     vector<LinkedList<Cordinates *> *> Day;
