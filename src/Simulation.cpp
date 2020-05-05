@@ -1,6 +1,7 @@
 
 #include "Function.h"
 #include "Simulation.h"
+#include "Menu.h"
 
 void Simulation::RandomCordinates(Cordinates *temp)
 {
@@ -46,9 +47,10 @@ int Simulation::fixborders(Cordinates *current, int randnumb)
 vector<bool> Simulation::GetListOfCovid19()
 {
     vector<bool> ListOfCovid19;
-    for (int i = 0; i < MAX_USER; i++)
+    ListOfCovid19.push_back(0); // we want User0 to always be uninfected because he isthe one simulating our user
+    for (int i = 1; i < max_users; i++)
     {
-        int randomchoice = (rand() % 2);
+        int randomchoice = (rand() % 2); //might add probablity
         switch (randomchoice)
         {
         case 0:
@@ -73,7 +75,7 @@ vector<LinkedList<Cordinates *> *> Simulation::GenerateDay()
 
     vector<LinkedList<Cordinates *> *> Day;
 
-    for (int i = 0; i < MAX_USER; i++)
+    for (int i = 0; i < simulation.max_users; i++)
     {
         Day.push_back(new LinkedList<Cordinates *>());
         simulation.start = 30;
@@ -85,7 +87,7 @@ vector<LinkedList<Cordinates *> *> Simulation::GenerateDay()
         {
             if (simulation.start == 30) //Random STARTING POINT FOR EVERY USER
             {
-                int randnumb = 1 + (rand() % 50);
+                int randnumb = 1 + (rand() % 100);
                 //the starting point for each person on each day
                 Cordinates *startingCordinates = new Cordinates(randnumb, randnumb, simulation.start);
                 temp = startingCordinates;
@@ -115,4 +117,60 @@ vector<LinkedList<Cordinates *> *> Simulation::GenerateDay()
         function.REPAIR(x);
     }
     return Day;
+}
+void Simulation::SummarizeData(vector<vector<LinkedList<Cordinates *> *>> &Users, int Day)
+{
+    Functions functions;
+    int daysbefore = 4;
+    if (Day % 4 == 0 && Day >= 4)
+    {
+        functions.SUMMARIZE_TRAJECTORY(Users, Day, daysbefore);
+    }
+    return;
+}
+void Simulation::PromtUser(vector<vector<LinkedList<Cordinates *> *>> &Users, int Day)
+{
+    Menu menu;
+    Functions functions;
+    menu.PromtForFunctions();
+    int value;
+    cin >> value;
+    switch (value)
+    {
+    case 1:
+        cout << functions.CROWDED_PLACES(Users, new Cordinates(25, 10, 0), new Cordinates(12, 10, 0), Day) << endl;
+        break;
+    case 2:
+        break;
+    case 3:
+        exit(0);
+    default:
+        break;
+    }
+}
+void Simulation::Simulate()
+{
+
+    Simulation simulation;
+    Functions functions;
+    Menu menu;
+
+    menu.InformUser();
+    menu.PrintMenu();
+    srand(time(0));
+
+    vector<vector<LinkedList<Cordinates *> *>> Users;
+    vector<bool> ListOfCovid19 = simulation.GetListOfCovid19();
+
+    int day = 0;
+    while (ListOfCovid19[0] == 0)
+    {
+        Users.push_back(simulation.GenerateDay());
+        cout << "\nDay:" << day + 1 << endl;
+        functions.POSSIBLE_COVID_19_INFECTION(Users[day], Users[day][0], ListOfCovid19);
+        simulation.SummarizeData(Users, day);
+        simulation.PromtUser(Users, day);
+        day += 1;
+    }
+    menu.PromtForSimulation();
 }

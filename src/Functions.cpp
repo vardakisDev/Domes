@@ -22,7 +22,7 @@ void Functions::REPAIR(LinkedList<Cordinates *> *&UserTrajectory)
     }
 }
 
-int Functions::CROWDED_PLACES(vector<LinkedList<Cordinates *> *> &Users, Cordinates *point1, Cordinates *point2)
+int Functions::CROWDED_PLACES(vector<vector<LinkedList<Cordinates *> *>> &Users, Cordinates *point1, Cordinates *point2, int Day)
 {
 
     //https://math.stackexchange.com/questions/190111/how-to-check-if-a-point-is-inside-a-rectangle
@@ -37,10 +37,10 @@ int Functions::CROWDED_PLACES(vector<LinkedList<Cordinates *> *> &Users, Cordina
     Cordinates *point4 = new Cordinates(int((xc + yd)), int((yc - xd)), 0);
     cout << point4->x << point4->y << endl
          << point3->x << point3->y << endl;
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < Users.size(); i++)
     {
 
-        Node<Cordinates *> *temp = Users[i]->head;
+        Node<Cordinates *> *temp = Users[Day][i]->head;
         while (temp)
         {
             if ((temp->data->x >= point1->x && temp->data->x <= point4->x) && (temp->data->y >= point2->y && temp->data->y <= point2->y))
@@ -55,18 +55,21 @@ int Functions::CROWDED_PLACES(vector<LinkedList<Cordinates *> *> &Users, Cordina
     return users;
 }
 
-void Functions::POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &Users, LinkedList<Cordinates *> *&UserTrajectory, vector<bool> ListOfCovid19)
+void Functions::POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &Users, LinkedList<Cordinates *> *&UserTrajectory, vector<bool> &ListOfCovid19)
 {
-    for (int i = 0; i < MAX_USER; i++)
+    for (int i = 0; i < Users.size(); i++)
     {
+        int x;
         int time = 0;
         Node<Cordinates *> *head = UserTrajectory->head;
         Node<Cordinates *> *infectedNode = Users[i]->head;
         if (Users[i]->head == head)
+
         {
+            x = i;
             i++;
         }
-        else
+        else if (ListOfCovid19[i] == 1)
         {
             while (head)
             {
@@ -76,9 +79,15 @@ void Functions::POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &
                     time += 30;
                     infectedNode = infectedNode->next;
                     head = head->next;
-                    if (time == 900)
+                    if (time == 2000)
                     {
-                        cout << "User infected by user" << i << endl;
+                        cout << "User infected by user" << i + 1 << endl;
+                        ListOfCovid19[x] = 1;
+                        return;
+                    }
+                    else if (infectedNode == NULL || head == NULL)
+                    {
+                        cout << "Not inftcted by any user";
                         return;
                     }
                 }
@@ -88,25 +97,31 @@ void Functions::POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &
     }
 }
 
-void Functions::SUMMARIZE_TRAJECTORY(LinkedList<Cordinates *> *&UserTrajectory)
+void Functions::SUMMARIZE_TRAJECTORY(vector<vector<LinkedList<Cordinates *> *>> &Users, int Day, int DaysBefore)
 {
-    Node<Cordinates *> *head = UserTrajectory->head->next, *temp;
-    Node<Cordinates *> *centerOfCircle = UserTrajectory->head;
-    while (head)
+    for (int i = Day - DaysBefore; i < Day; i++)
     {
-        if (deFineCircle(centerOfCircle->data, head->data))
+        for (int j = 0; j < Users.size(); j++)
         {
-            temp = head->next;
-            UserTrajectory->removeNode(head->data);
-            cout << "delted" << endl;
+            {
+                Node<Cordinates *> *head = Users[i][j]->head->next, *temp;
+                Node<Cordinates *> *centerOfCircle = Users[i][j]->head;
+                while (head)
+                {
+                    if (deFineCircle(centerOfCircle->data, head->data))
+                    {
+                        temp = head->next;
+                        Users[i][j]->removeNode(head->data);
+                    }
+                    else
+                    {
+                        centerOfCircle = head;
+                        temp = head->next;
+                    }
+                    head = temp;
+                }
+            }
         }
-        else
-        {
-            cout << "nop" << endl;
-            centerOfCircle = head;
-            temp = head->next;
-        }
-        head = temp;
     }
     return;
 }

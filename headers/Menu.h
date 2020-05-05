@@ -7,4 +7,6 @@ public:
     void InformUser();
     void PrintEndofDay();
     void AvailableUserFunctions();
+    void PromtForSimulation();
+    void PromtForFunctions();
 };

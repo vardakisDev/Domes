@@ -4,7 +4,6 @@
 #include "linkedlist.h"
 #include "Cordinates.h"
 #include <vector>
-#define MAX_USER 3
 #define R 2
 #define t1 150  // t1 is the minimum a user stayed in R - distance of infected user
 #define t2 7200 //t2 is  minimum time a user stayed in R - distance of infected user
@@ -12,10 +11,10 @@
 class Functions
 {
 public:
-    void SUMMARIZE_TRAJECTORY(LinkedList<Cordinates *> *&UserTrajectory);
+    void SUMMARIZE_TRAJECTORY(vector<vector<LinkedList<Cordinates *> *>> &Users, int Day, int DaysBefore);
     void REPAIR(LinkedList<Cordinates *> *&UserTrajectory);
-    void POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &Users, LinkedList<Cordinates *> *&UserTrajectory, vector<bool> ListOfCovid19);
-    int CROWDED_PLACES(vector<LinkedList<Cordinates *> *> &Users, Cordinates *point1, Cordinates *point2);
+    void POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &Users, LinkedList<Cordinates *> *&UserTrajectory, vector<bool> &ListOfCovid19);
+    int CROWDED_PLACES(vector<vector<LinkedList<Cordinates *> *>> &Users, Cordinates *point1, Cordinates *point2, int Day);
 
     int getDistance(Cordinates *temp1, Cordinates *temp2)
     {

@@ -10,8 +10,9 @@ void Menu::InformUser()
 }
 void Menu::PrintMenu()
 {
+    cout << "\n -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
     cout << "\n Menu";
-    cout << "\n Start The Tracking Proccess";
+    cout << "\n Start The Tracking Proccess...\n";
 }
 void Menu::PrintEndofDay()
 {
@@ -21,4 +22,17 @@ void Menu::AvailableUserFunctions()
 {
     cout << "\n 1.Find crowed/hotspot places";
     cout << "\n 2.Exit";
+}
+
+void Menu::PromtForSimulation()
+{
+    cout << "\n Your were infected ,  do you want to run the simualtion for all users ?";
+}
+
+void Menu::PromtForFunctions()
+{
+    cout << "\n Choose from the above menu: ";
+    cout << "\n 1.Find possible hotspots";
+    cout << "\n 2.Continue to the next day";
+    cout << "\n 3. Exit the programm";
 }
