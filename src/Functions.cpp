@@ -95,6 +95,8 @@ void Functions::POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &
             }
         }
     }
+    cout << "Not inftcted by any user";
+    return;
 }
 
 void Functions::SUMMARIZE_TRAJECTORY(vector<vector<LinkedList<Cordinates *> *>> &Users, int Day, int DaysBefore)

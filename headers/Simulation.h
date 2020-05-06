@@ -13,8 +13,8 @@ public:
     int day = 86000;
     int step = 30;
     int max_users = 20;
+    int DxD = 150;
     void RandomCordinates(Cordinates *temp);
-    int fixborders(Cordinates *current, int randnumb);
     vector<bool> GetListOfCovid19();
     vector<LinkedList<Cordinates *> *> GenerateDay();
     void Simulate();

@@ -5,43 +5,32 @@
 
 void Simulation::RandomCordinates(Cordinates *temp)
 {
-
+    Simulation simulation;
     int randomspeed = ((rand() % 2) + 4);
     int result = 1 + (rand() % 5);
 
     switch (result)
     {
     case 1:
-        randomspeed = fixborders(temp, randomspeed);
-        temp->x += randomspeed;
+        randomspeed = (temp->x + randomspeed > simulation.DxD) ? -randomspeed : randomspeed;
+        temp->x = temp->x + randomspeed;
         break;
     case 2:
-        randomspeed = fixborders(temp, randomspeed);
-        temp->x -= randomspeed;
+        randomspeed = (temp->x - randomspeed < 0) ? -randomspeed : randomspeed;
+        temp->x = temp->x - randomspeed;
         break;
     case 3:
-        randomspeed = fixborders(temp, randomspeed);
-        temp->y += randomspeed;
+        randomspeed = (temp->y + randomspeed > simulation.DxD) ? -randomspeed : randomspeed;
+        temp->y = temp->y + randomspeed;
         break;
     case 4:
-        randomspeed = fixborders(temp, randomspeed);
-        temp->y -= randomspeed;
+        randomspeed = (temp->y - randomspeed < 0) ? -randomspeed : randomspeed;
+        temp->y = temp->y - randomspeed;
         break;
-    //case 5 and 6 are cases where our stupid dot doesnt move to favour him staying more time in the same area with someone infected , sry dot !
+        //case 5 is  cases where our stupid dot doesnt move to favour him staying more time in the same area with someone infected , sry dot !
     case 5:
         break;
     }
-}
-
-int Simulation::fixborders(Cordinates *current, int randnumb)
-{
-    if (current->x + randnumb > 100 | current->y + randnumb > 100 | current->y - randnumb < 0 | current->x - randnumb < 0)
-    {
-        // cout << "Out of border chanign" << randnumb << "to" << -randnumb << endl;
-        randnumb = -randnumb;
-        return randnumb;
-    }
-    return randnumb;
 }
 
 vector<bool> Simulation::GetListOfCovid19()
@@ -138,7 +127,7 @@ void Simulation::PromtUser(vector<vector<LinkedList<Cordinates *> *>> &Users, in
     switch (value)
     {
     case 1:
-        cout << functions.CROWDED_PLACES(Users, new Cordinates(25, 10, 0), new Cordinates(12, 10, 0), Day) << endl;
+        cout << functions.CROWDED_PLACES(Users, new Cordinates(0, 4, 0), new Cordinates(6, 8, 0), Day) << endl;
         break;
     case 2:
         break;
@@ -174,3 +163,4 @@ void Simulation::Simulate()
     }
     menu.PromtForSimulation();
 }
+//g++ -I../headers Final.cpp Cordinates.cpp Functions.cpp Menu.cpp Simulation.cpp -o main
