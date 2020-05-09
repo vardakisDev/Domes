@@ -35,8 +35,6 @@ int Functions::CROWDED_PLACES(vector<vector<LinkedList<Cordinates *> *>> &Users,
 
     Cordinates *point3 = new Cordinates(int((xc - yd)), int((yc + xd)), 0);
     Cordinates *point4 = new Cordinates(int((xc + yd)), int((yc - xd)), 0);
-    cout << point4->x << point4->y << endl
-         << point3->x << point3->y << endl;
     for (int i = 0; i < Users.size(); i++)
     {
 
@@ -46,6 +44,7 @@ int Functions::CROWDED_PLACES(vector<vector<LinkedList<Cordinates *> *>> &Users,
             if ((temp->data->x >= point1->x && temp->data->x <= point4->x) && (temp->data->y >= point2->y && temp->data->y <= point2->y))
             {
                 users++;
+                break;
             }
 
             temp = temp->next;

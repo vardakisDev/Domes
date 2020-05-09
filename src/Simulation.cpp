@@ -127,7 +127,23 @@ void Simulation::PromtUser(vector<vector<LinkedList<Cordinates *> *>> &Users, in
     switch (value)
     {
     case 1:
-        cout << functions.CROWDED_PLACES(Users, new Cordinates(0, 4, 0), new Cordinates(6, 8, 0), Day) << endl;
+        int flag;
+        while (flag)
+        {
+            cout << "Please enter the following cordinates of the square regions you want to search for possible hotspots";
+            int point1, point2, point3, point4;
+            cout << "\n Enter Point 1";
+            cin >> point1;
+            cout << "\n Enter Point 2";
+            cin >> point2;
+            cout << "\n Enter Point 3";
+            cin >> point3;
+            cout << "\n Enter Point 4";
+            cin >> point4;
+            cout << "This users where found inisde the square region :" << functions.CROWDED_PLACES(Users, new Cordinates(point1, point2, 0), new Cordinates(point3, point4, 0), Day) << endl;
+            cout << "Would you like to use other pints ? \n Press 1 to input new numbers or 0 to continue the simulation" << endl;
+            cin >> flag;
+        }
         break;
     case 2:
         break;

@@ -246,30 +246,6 @@ void LinkedList<T>::removeNode(T node)
     return;
 }
 
-//Gave up on this method ... because it takes a complexity o(n) , i just simply return the sizefrom the object
-// //Itarates every node an increment a counter its time data!null by 1 but this takes 0(N) TIME so i implemented a more effiecent way
-// template <class T>
-// int LinkedList<T>::size()
-// {
-//     if (head == NULL)
-//         return 0;
-//     Node<T> *temp = head;
-//     int counter = 0;
-
-//     while (temp != NULL)
-//     {
-//         counter += 1;
-//         temp = temp->next;
-//     }
-
-//     return counter;
-// }
-//
-
-//For printing the list i hace to methods ... one prints node data with pointers and the other if the object is just int string etc.
-//Maybe i fix it later
-
-//The code works simply , we point a pointer at the start of the list and we print in each loop the node.data and then the pointer points at the node->next and the loop continues
 template <class T>
 void LinkedList<T>::printlist()
 {
