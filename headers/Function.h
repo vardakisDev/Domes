@@ -4,9 +4,8 @@
 #include "linkedlist.h"
 #include "Cordinates.h"
 #include <vector>
+
 #define R 2
-#define t1 150  // t1 is the minimum a user stayed in R - distance of infected user
-#define t2 7200 //t2 is  minimum time a user stayed in R - distance of infected user
 
 class Functions
 {

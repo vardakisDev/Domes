@@ -57,46 +57,76 @@ int Functions::CROWDED_PLACES(vector<vector<LinkedList<Cordinates *> *>> &Users,
 
 void Functions::POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &Users, LinkedList<Cordinates *> *&UserTrajectory, vector<bool> &ListOfCovid19)
 {
-    for (int i = 0; i < Users.size(); i++)
+    int timeDiference = 7200;
+    int time;
+    time = 0;
+    for (int i = 1; i < Users.size(); i++)
     {
-        int x;
-        int time = 0;
-        Node<Cordinates *> *head = UserTrajectory->head;
+        Node<Cordinates *> *head = UserTrajectory->head, *previousVisied = UserTrajectory->head;
         Node<Cordinates *> *infectedNode = Users[i]->head;
-        if (Users[i]->head == head)
-
+        if (ListOfCovid19[i] == 1)
         {
-            x = i;
-            i++;
-        }
-        else if (ListOfCovid19[i] == 1)
-        {
-            while (head)
+            while (head && infectedNode)
             {
-                time = 0;
-                while (deFineCircle(infectedNode->data, head->data))
+                if (!deFineCircle(previousVisied->data, head->data))
                 {
+                    time = 0;
+                }
+                if (deFineCircle(infectedNode->data, head->data) && infectedNode->data->z - head->data->z < timeDiference)
+                {
+                    previousVisied = head;
                     time += 30;
-                    infectedNode = infectedNode->next;
-                    head = head->next;
-                    if (time == 2000)
-                    {
-                        cout << "User infected by user" << i + 1 << endl;
-                        ListOfCovid19[x] = 1;
-                        return;
-                    }
-                    else if (infectedNode == NULL || head == NULL)
-                    {
-                        cout << "Not inftcted by any user";
-                        return;
-                    }
+                    if (infectedNode->next)
+                        infectedNode = infectedNode->next;
+                    else
+                        break;
+                }
+                if (time == 1800)
+                {
+                    cout << "User infected by user " << i << endl;
+                    ListOfCovid19[0] = 1;
+                    return;
                 }
                 head = head->next;
             }
         }
     }
-    cout << "Not inftcted by any user";
-    return;
+    cout << "Not infected by any user";
+
+    //     for (int i = 1; i < Users.size(); i++)
+    //     {
+    //         int time = 0;
+    //         Node<Cordinates *> *head = UserTrajectory->head;
+    //         Node<Cordinates *> *infectedNode = Users[i]->head;
+    //         if (ListOfCovid19[i] == 1)
+    //         {
+    //             while (head)
+    //             {
+    //                 time = 0;
+    //                 while (deFineCircle(infectedNode->data, head->data) && infectedNode->data->z - head->data->z < timeDiference)
+    //                 {
+    //                     time += 30;
+    //                     infectedNode = infectedNode->next;
+    //                     head = head->next;
+    //                     if (time == 1900)
+    //                     {
+    //                         cout << "User infected by user" << i + 1 << endl;
+    //                         ListOfCovid19[0] = 1;
+    //                         return;
+    //                     }
+    //                     else if (infectedNode == NULL || head == NULL)
+    //                     {
+    //                         cout << "Not inftcted by any user";
+    //                         return;
+    //                     }
+    //                 }
+    //                 infectedNode = infectedNode->next;
+    //                 head = head->next;
+    //             }
+    //         }
+    //     }
+    //     cout << "Not inftcted by any user";
+    //     return;
 }
 
 void Functions::SUMMARIZE_TRAJECTORY(vector<vector<LinkedList<Cordinates *> *>> &Users, int Day, int DaysBefore)
@@ -125,5 +155,6 @@ void Functions::SUMMARIZE_TRAJECTORY(vector<vector<LinkedList<Cordinates *> *>> 
             }
         }
     }
+    cout << "\n Refomarting the previous 4 Days";
     return;
 }
