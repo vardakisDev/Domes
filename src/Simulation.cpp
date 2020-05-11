@@ -173,18 +173,18 @@ void Simulation::Simulate()
     vector<vector<LinkedList<Cordinates *> *>> Users;
     vector<bool> ListOfCovid19 = simulation.GetListOfCovid19();
 
-    int day = 0;
+    int Day = 0;
     bool flag;
     while (ListOfCovid19[0] == 0)
     {
         Users.push_back(simulation.GenerateDay());
-        cout << "\nDay:" << day + 1 << endl;
-        functions.POSSIBLE_COVID_19_INFECTION(Users[day], Users[day][0], ListOfCovid19, 0) ? cout << "Infected" : cout << "Not infected";
+        cout << "\nDay:" << Day + 1 << endl;
+        functions.POSSIBLE_COVID_19_INFECTION(Users[Day], Users[Day][0], ListOfCovid19, 0) ? cout << "Infected" : cout << "Not infected";
 
-        simulation.SummarizeData(Users, day);
-        simulation.PromtUser(Users, ListOfCovid19, day);
-        day += 1;
+        simulation.SummarizeData(Users, Day);
+        simulation.PromtUser(Users, ListOfCovid19, Day);
+        Day += 1;
     }
-    cout << "User was infected on day: " << day;
+    cout << "User was infected on day: " << Day;
 }
 //g++ -I../headers Final.cpp Cordinates.cpp Functions.cpp Menu.cpp Simulation.cpp -o main
