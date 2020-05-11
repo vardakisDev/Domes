@@ -1,5 +1,6 @@
 #include "Function.h"
 #include <vector>
+#include "Simulation.h"
 void Functions::REPAIR(LinkedList<Cordinates *> *&UserTrajectory)
 {
     Node<Cordinates *> *temp = UserTrajectory->head, *nodeAfterTemp = UserTrajectory->head->next;
@@ -54,78 +55,43 @@ int Functions::CROWDED_PLACES(vector<vector<LinkedList<Cordinates *> *>> &Users,
     return users;
 }
 
-void Functions::POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &Users, LinkedList<Cordinates *> *&UserTrajectory, vector<bool> &ListOfCovid19)
+bool Functions::POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &Users, LinkedList<Cordinates *> *&UserTrajectory, vector<bool> &ListOfCovid19, int possible)
 {
-    int timeDiference = 7200;
-    int time;
-    time = 0;
-    for (int i = 1; i < Users.size(); i++)
+    Simulation simulation;
+    for (int i = 0; i < Users.size(); i++)
     {
+        if (i == possible)
+            i++;
+
         Node<Cordinates *> *head = UserTrajectory->head, *previousVisied = UserTrajectory->head;
         Node<Cordinates *> *infectedNode = Users[i]->head;
-        if (ListOfCovid19[i] == 1)
+        if (ListOfCovid19[i] == 1 && ListOfCovid19[possible] == 0)
         {
             while (head && infectedNode)
             {
                 if (!deFineCircle(previousVisied->data, head->data))
                 {
-                    time = 0;
+                    simulation.time = 0;
                 }
-                if (deFineCircle(infectedNode->data, head->data) && infectedNode->data->z - head->data->z < timeDiference)
+                if (deFineCircle(infectedNode->data, head->data) && infectedNode->data->z - head->data->z < simulation.timeDiference)
                 {
                     previousVisied = head;
-                    time += 30;
+                    simulation.time += 30;
                     if (infectedNode->next)
                         infectedNode = infectedNode->next;
                     else
                         break;
                 }
-                if (time == 1800)
+                if (simulation.time == simulation.timeInside)
                 {
-                    cout << "User infected by user " << i << endl;
-                    ListOfCovid19[0] = 1;
-                    return;
+                    ListOfCovid19[possible] = 1;
+                    return 1;
                 }
                 head = head->next;
             }
         }
     }
-    cout << "Not infected by any user";
-
-    //     for (int i = 1; i < Users.size(); i++)
-    //     {
-    //         int time = 0;
-    //         Node<Cordinates *> *head = UserTrajectory->head;
-    //         Node<Cordinates *> *infectedNode = Users[i]->head;
-    //         if (ListOfCovid19[i] == 1)
-    //         {
-    //             while (head)
-    //             {
-    //                 time = 0;
-    //                 while (deFineCircle(infectedNode->data, head->data) && infectedNode->data->z - head->data->z < timeDiference)
-    //                 {
-    //                     time += 30;
-    //                     infectedNode = infectedNode->next;
-    //                     head = head->next;
-    //                     if (time == 1900)
-    //                     {
-    //                         cout << "User infected by user" << i + 1 << endl;
-    //                         ListOfCovid19[0] = 1;
-    //                         return;
-    //                     }
-    //                     else if (infectedNode == NULL || head == NULL)
-    //                     {
-    //                         cout << "Not inftcted by any user";
-    //                         return;
-    //                     }
-    //                 }
-    //                 infectedNode = infectedNode->next;
-    //                 head = head->next;
-    //             }
-    //         }
-    //     }
-    //     cout << "Not inftcted by any user";
-    //     return;
+    return 0;
 }
 
 void Functions::SUMMARIZE_TRAJECTORY(vector<vector<LinkedList<Cordinates *> *>> &Users, int Day, int DaysBefore)

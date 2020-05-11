@@ -3,6 +3,7 @@
 #include <random>
 #include "linkedlist.h"
 #include "Cordinates.h"
+
 #include <vector>
 
 #define R 2
@@ -12,7 +13,7 @@ class Functions
 public:
     void SUMMARIZE_TRAJECTORY(vector<vector<LinkedList<Cordinates *> *>> &Users, int Day, int DaysBefore);
     void REPAIR(LinkedList<Cordinates *> *&UserTrajectory);
-    void POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &Users, LinkedList<Cordinates *> *&UserTrajectory, vector<bool> &ListOfCovid19);
+    bool POSSIBLE_COVID_19_INFECTION(vector<LinkedList<Cordinates *> *> &Users, LinkedList<Cordinates *> *&UserTrajectory, vector<bool> &ListOfCovid19, int possible);
     int CROWDED_PLACES(vector<vector<LinkedList<Cordinates *> *>> &Users, Cordinates *point1, Cordinates *point2, int Day);
 
     int getDistance(Cordinates *temp1, Cordinates *temp2)

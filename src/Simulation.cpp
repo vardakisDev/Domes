@@ -6,7 +6,7 @@
 void Simulation::RandomCordinates(Cordinates *temp)
 {
     Simulation simulation;
-    int randomspeed = ((rand() % 2) + 4);
+    int randomspeed = rand() % (7 - 3) + 3;
     int result = 1 + (rand() % 5);
 
     switch (result)
@@ -76,7 +76,7 @@ vector<LinkedList<Cordinates *> *> Simulation::GenerateDay()
         {
             if (simulation.start == 30) //Random STARTING POINT FOR EVERY USER
             {
-                int randnumb = 1 + (rand() % 100);
+                int randnumb = 1 + (rand() % 75);
                 //the starting point for each person on each day
                 Cordinates *startingCordinates = new Cordinates(randnumb, randnumb, simulation.start);
                 temp = startingCordinates;
@@ -117,11 +117,16 @@ void Simulation::SummarizeData(vector<vector<LinkedList<Cordinates *> *>> &Users
     }
     return;
 }
-void Simulation::PromtUser(vector<vector<LinkedList<Cordinates *> *>> &Users, int Day)
+void Simulation::PromtUser(vector<vector<LinkedList<Cordinates *> *>> &Users, vector<bool> ListOfCovid19, int Day)
 {
     Menu menu;
     Functions functions;
     menu.PromtForFunctions();
+    for (int i = 1; i < Users.size(); i++)
+    {
+        if (ListOfCovid19[i] == 0)
+            functions.POSSIBLE_COVID_19_INFECTION(Users[Day], Users[Day][i], ListOfCovid19, i);
+    }
     int value;
     cin >> value;
     switch (value)
@@ -132,19 +137,20 @@ void Simulation::PromtUser(vector<vector<LinkedList<Cordinates *> *>> &Users, in
         {
             cout << "Please enter the following cordinates of the square regions you want to search for possible hotspots";
             int point1, point2, point3, point4;
-            cout << "\n Enter Point 1";
+            cout << "\n Enter Point 1 ";
             cin >> point1;
-            cout << "\n Enter Point 2";
+            cout << "\n Enter Point 2 ";
             cin >> point2;
-            cout << "\n Enter Point 3";
+            cout << "\n Enter Point 3 ";
             cin >> point3;
-            cout << "\n Enter Point 4";
+            cout << "\n Enter Point 4 ";
             cin >> point4;
             cout << "This users where found inisde the square region :" << functions.CROWDED_PLACES(Users, new Cordinates(point1, point2, 0), new Cordinates(point3, point4, 0), Day) << endl;
             cout << "Would you like to use other pints ? \n Press 1 to input new numbers or 0 to continue the simulation" << endl;
             cin >> flag;
         }
         break;
+
     case 2:
         break;
     case 3:
@@ -162,21 +168,23 @@ void Simulation::Simulate()
 
     menu.InformUser();
     menu.PrintMenu();
-    srand(time(0));
+    srand((int)time_t(0));
 
     vector<vector<LinkedList<Cordinates *> *>> Users;
     vector<bool> ListOfCovid19 = simulation.GetListOfCovid19();
 
     int day = 0;
+    bool flag;
     while (ListOfCovid19[0] == 0)
     {
         Users.push_back(simulation.GenerateDay());
         cout << "\nDay:" << day + 1 << endl;
-        functions.POSSIBLE_COVID_19_INFECTION(Users[day], Users[day][0], ListOfCovid19);
+        functions.POSSIBLE_COVID_19_INFECTION(Users[day], Users[day][0], ListOfCovid19, 0) ? cout << "Infected" : cout << "Not infected";
+
         simulation.SummarizeData(Users, day);
-        simulation.PromtUser(Users, day);
+        simulation.PromtUser(Users, ListOfCovid19, day);
         day += 1;
     }
-    menu.PromtForSimulation();
+    cout << "User was infected on day: " << day;
 }
 //g++ -I../headers Final.cpp Cordinates.cpp Functions.cpp Menu.cpp Simulation.cpp -o main
