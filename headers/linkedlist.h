@@ -2,7 +2,6 @@
 #define LINKLIST_H
 #include "node.h"
 #include <iostream>
-using namespace std;
 
 template <class T>
 class LinkedList
@@ -20,20 +19,6 @@ public:
     void printlist();
     void pointerprint();
     void printbyIndex(int index);
-
-    // template <class TT> //friend enables us to access the private and protective members of the class LinkedList
-    // friend std::ostream &operator<<(ostream &out, const LinkedList<TT> &obj) //the mean goal of this code is to be able cout<<LinkedList
-    // {
-    //     Node<TT> *temp = obj.head;
-    //     while (temp != NULL)
-    //     {
-    //         out << *(temp->getData()) << endl;
-    //         temp = temp->getNext();
-    //     }
-    //     cout << endl;
-    //     return out;
-    // }
-    //give the size of the list without having to iterate the whole list in 0(N) time
     int getSize() { return size; };
     void Sizeup()
     {
@@ -182,7 +167,7 @@ void LinkedList<T>::addAtBack(T node)
         cout << "Node is Null" << endl;
     }
 }
-//Needs  fixing
+//Adds a noode after a given node
 template <class T>
 void LinkedList<T>::addAfterNode(T oldNode, T nodeToInsert)
 {
@@ -216,7 +201,7 @@ void LinkedList<T>::addAfterNode(T oldNode, T nodeToInsert)
         temp2->prev = newNode;
     }
 }
-//needs fixing
+//removes a given node from the list
 template <class T>
 void LinkedList<T>::removeNode(T node)
 {
@@ -245,7 +230,7 @@ void LinkedList<T>::removeNode(T node)
     delete p;
     return;
 }
-
+//prints a list of objects
 template <class T>
 void LinkedList<T>::printlist()
 {
@@ -267,6 +252,7 @@ void LinkedList<T>::printlist()
     }
     cout << "Print List " << endl;
 }
+//prints a list of pointers to object
 template <class T>
 void LinkedList<T>::pointerprint()
 {
@@ -287,12 +273,6 @@ void LinkedList<T>::pointerprint()
         }
     }
     cout << "Print List " << endl;
-}
-
-template <class T>
-void LinkedList<T>::printbyIndex(int index)
-{
-    Node<T> *temp;
 }
 
 #endif
