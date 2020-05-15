@@ -25,15 +25,12 @@ public:
         size++;
     };
     void Sizeminus() { size--; };
-    void setInfected(int i) { infected = i; }
-    int getInfected() { return infected; }
     bool isEmpty() { return head->next == NULL; };
     Node<T> *getHead() { return head; };
     Node<T> *head;
 
 private:
     int size;
-    int infected;
 };
 
 template <class T>
@@ -83,14 +80,14 @@ void LinkedList<T>::InsertAtIndex(int k, T node)
 {
     if (k < 0)
     {
-        cout << "OUTOFBOUNDS" << endl;
+        std::cout << "OUTOFBOUNDS" << std::endl;
         return;
     }
     Node<T> *temp = head;
     for (int i = 1; i < k; i++)
         temp = temp->next;
     if (k > 0 && !temp)
-        cout << "OUTOFBOUNDS" << endl;
+        std::cout << "OUTOFBOUNDS" << std::endl;
     Node<T> *toAdd = new Node<T>();
     toAdd->data = node;
     if (k)
@@ -131,7 +128,7 @@ void LinkedList<T>::addAtFront(T node)
     }
     else
     {
-        cout << "Node is Null" << endl;
+        std::cout << "Node is Null" << std::endl;
         return;
     }
     Sizeup();
@@ -164,43 +161,10 @@ void LinkedList<T>::addAtBack(T node)
     }
     else
     {
-        cout << "Node is Null" << endl;
+        std::cout << "Node is Null" << std::endl;
     }
 }
-//Adds a noode after a given node
-template <class T>
-void LinkedList<T>::addAfterNode(T oldNode, T nodeToInsert)
-{
-    Node<T> *newNode = new Node<T>();
-    newNode->data = nodeToInsert;
-    Node<T> *oNode = new Node<T>();
-    oNode->data = oldNode;
-    if (head == nullptr)
-    {
-        head = newNode;
-    }
-    else
-    {
-        Node<T> *tempNode = head, *temp2;
-        while (tempNode->data == oNode->data)
-        {
-            if (tempNode->next == nullptr)
-            {
-                cout << "Node not found in data" << endl;
-                break;
-            }
-            else
-            {
-                tempNode = tempNode->next;
-            }
-        }
-        temp2 = tempNode->next;
-        tempNode->next = newNode;
-        newNode->prev = tempNode;
-        newNode->next = temp2;
-        temp2->prev = newNode;
-    }
-}
+
 //removes a given node from the list
 template <class T>
 void LinkedList<T>::removeNode(T node)
@@ -209,7 +173,7 @@ void LinkedList<T>::removeNode(T node)
     int indexToDelete = FindNode(node);
     if (indexToDelete <= 0)
     {
-        cout << "OUTOFBONS";
+        std::cout << "OUTOFBONS";
         return;
     }
     if (indexToDelete == 1)
@@ -221,7 +185,7 @@ void LinkedList<T>::removeNode(T node)
             y = y->next;
         if (!y || !y->next)
         {
-            cout << "Throoutofbounds" << endl;
+            std::cout << "Throoutofbounds" << std::endl;
             return;
         }
         p = y->next;
@@ -230,28 +194,7 @@ void LinkedList<T>::removeNode(T node)
     delete p;
     return;
 }
-//prints a list of objects
-template <class T>
-void LinkedList<T>::printlist()
-{
-    Node<T> *temp = head; //We point at the start of the list
-    if (temp == NULL)
-    {
-        cout << "List is empty" << endl; // if head is null list is empty
-        return;
-    }
-    else
-    {
-        {
-            while (temp)
-            {
-                cout << temp->data;
-                temp = temp->next;
-            }
-        }
-    }
-    cout << "Print List " << endl;
-}
+
 //prints a list of pointers to object
 template <class T>
 void LinkedList<T>::pointerprint()
@@ -259,7 +202,7 @@ void LinkedList<T>::pointerprint()
     Node<T> *temp = head; //We point at the start of the list
     if (temp == NULL)
     {
-        cout << "List is empty" << endl; // if head is null list is empty
+        std::cout << "List is empty" << std::endl; // if head is null list is empty
         return;
     }
     else
@@ -267,12 +210,12 @@ void LinkedList<T>::pointerprint()
         {
             while (temp)
             {
-                cout << *(temp->data); // printing temp->data prints the adress so we i just print where it points , take that cpp
-                temp = temp->next;     //we iterate through the whole list
+                std::cout << *(temp->data); // printing temp->data prints the adress so we i just print where it points , take that cpp
+                temp = temp->next;          //we iterate through the whole list
             }
         }
     }
-    cout << "Print List " << endl;
+    std::cout << "Print List " << std::endl;
 }
 
 #endif

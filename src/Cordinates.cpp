@@ -1,5 +1,5 @@
 
-#include "Cordinates.h"
+#include "../headers/Cordinates.h"
 #include <iostream>
 
 using namespace std;

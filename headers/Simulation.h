@@ -17,10 +17,11 @@ public:
     int timeDiference = 7200; //timeDiference for FIND_POSSIBLE_INFECTION
     int timeInside = 1800;
 
-    void RandomCordinates(Cordinates *temp);                                                                               //Generates a randomspeed from 3-6 and increments the random given cordinates of rand() from the simulation
-    std::vector<bool> GetListOfCovid19();                                                                                  //Generates a list of Covid19 , an array of bool that 0 = uninfected and 1 = infected , our Users which is user0 is always 0
-    std::vector<LinkedList<Cordinates *> *> GenerateDay();                                                                 //Generates a day for all the max_users
-    void Simulate();                                                                                                       // Each simulation starts from here
+    void RandomCordinates(Cordinates *temp);               //Generates a randomspeed from 3-6 and increments the random given cordinates of rand() from the simulation
+    std::vector<bool> GetListOfCovid19();                  //Generates a list of Covid19 , an array of bool that 0 = uninfected and 1 = infected , our Users which is user0 is always 0
+    std::vector<LinkedList<Cordinates *> *> GenerateDay(); //Generates a day for all the max_users
+    void Simulate();
+    // Each simulation starts from here
     void SummarizeData(std::vector<std::vector<LinkedList<Cordinates *> *>> &Users, int Day);                              //calss SUMMARIZE_TRAJECTORY
     void PromtUser(std::vector<std::vector<LinkedList<Cordinates *> *>> &Users, std::vector<bool> ListOfCovid19, int Day); //Promts the user for the possible actions he can take
 };

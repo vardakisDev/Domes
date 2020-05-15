@@ -1,8 +1,8 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 #include <random>
-#include "linkedlist.h"
-#include "Cordinates.h"
+#include "../headers/Linkedlist.h"
+#include "../headers/Cordinates.h"
 
 #include <vector>
 

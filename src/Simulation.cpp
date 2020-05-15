@@ -1,7 +1,8 @@
 
-#include "Function.h"
-#include "Simulation.h"
-#include "Menu.h"
+#include "../headers/Functions.h"
+#include "../headers/Simulation.h"
+#include "../headers/Menu.h"
+
 using namespace std;
 
 //This method does crreate a vector of pointers of list that represent each day of the running simulation.
@@ -41,9 +42,10 @@ vector<LinkedList<Cordinates *> *> Simulation::GenerateDay()
         {
             if (simulation.start == 30) //Random STARTING POINT FOR EVERY USER
             {
-                int randnumb = 1 + (rand() % 100);
+                int randX = 1 + (rand() % 100);
+                int randY = 1 + (rand() % 100);
                 //the starting point for each person on each day and then we construct a new cordinate and add it to the back of the list
-                Cordinates *startingCordinates = new Cordinates(randnumb, randnumb, simulation.start);
+                Cordinates *startingCordinates = new Cordinates(randX, randY, simulation.start);
                 temp = startingCordinates; //save the startingCordinates
                 Day[i]->addAtBack(startingCordinates);
             }
@@ -208,13 +210,12 @@ void Simulation::Simulate()
 
     menu.InformUser();
     menu.PrintMenu();
-    srand((int)time_t(0));
+    srand(time(0));
 
     vector<vector<LinkedList<Cordinates *> *>> Users;
     vector<bool> ListOfCovid19 = simulation.GetListOfCovid19();
 
     int Day = 0;
-    bool flag;
     while (ListOfCovid19[0] == 0)
     {
         Users.push_back(simulation.GenerateDay());

@@ -1,7 +1,8 @@
-#include "Function.h"
+#include "../headers/Functions.h"
 #include <vector>
-#include "Simulation.h"
-
+#include "../headers/Simulation.h"
+#include "../headers/Linkedlist.h"
+using namespace std;
 //these methods takes in the given UserTrajectory and fill the missing node that simulated the gps lost singal
 //We loop through the list , if we find two nodes that have a time differnce bigger than 30 sec we iniate a loop that runs a loop until the time diference is reduced to 30.
 //  tempnode                  time differnce is 60 sec which means there 2 nodes missing            nodeAfterTemp

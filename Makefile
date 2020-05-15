@@ -1,7 +1,18 @@
-INC_DIR = headers
-SRC_DIR = src
-OBJ_DIR = objects
-CFLAGS = -c -Wall -I.
+CC = g++
+CFLAGS = -I../headers
 
 
-SRCS = $(SRC_DIR)/
+SRC = $(wildcard src/*.cpp)
+OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
+EXEC = SimulationFinalCovid19
+
+$(EXEC) : $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(EXEC)
+
+obj/%.o: src/%.cpp
+	$(CC) $(CFLAGS) -c  $< -o $@
+
+
+clean:
+	del obj\*.o
+	del $(EXEC).exe
