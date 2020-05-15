@@ -97,3 +97,7 @@ make clean
 .\SimulationFinalCovid19
 </p>
 </details>
+
+![SLIDES - 1](https://user-images.githubusercontent.com/6078810/82042681-fbbc7b00-96b2-11ea-8ff8-81548ece57c4.jpg)
+
+![SLIDES - 2](https://user-images.githubusercontent.com/6078810/82042792-2a3a5600-96b3-11ea-84e3-8209693b83af.jpg)
