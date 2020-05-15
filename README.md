@@ -116,6 +116,6 @@ Run .exe
 <details>
 <summary>Example run </summary>
 
-<div style="width:500px;max-width:100%;"><div style="height:0;padding-bottom:58.6%;position:relative;"><iframe width="500" height="293" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameBorder="0" src="https://imgflip.com/embed/41k08t"></iframe></div><p><a href="https://imgflip.com/gif/41k08t">via Imgflip</a></p></div>
+![output_NrQbLv](https://user-images.githubusercontent.com/6078810/82045455-c9f9e300-96b7-11ea-85e2-fe449234ef08.gif)
 
 </details>
