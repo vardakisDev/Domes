@@ -90,12 +90,19 @@
    </details>
 
 <details>
-<summary>Compile ,Clean , Run</summary>
-<p>
-make 
-make clean
-.\SimulationFinalCovid19
-</p>
+<summary>Compile ,Clean , Run :</summary>
+Comiple:
+
+> make
+
+Clean .o and exe
+
+> make clean
+
+Run .exe
+
+> .\SimulationFinalCovid19
+
 </details>
 
 ![SLIDES - 1](https://user-images.githubusercontent.com/6078810/82042681-fbbc7b00-96b2-11ea-8ff8-81548ece57c4.jpg)
