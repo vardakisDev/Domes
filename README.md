@@ -90,6 +90,10 @@
    </details>
 
 <details>
-<summary>Compile and run</summary>
-> make
+<summary>Compile ,Clean , Run</summary>
+<p>
+make 
+make clean
+.\SimulationFinalCovid19
+</p>
 </details>
