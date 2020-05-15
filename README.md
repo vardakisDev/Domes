@@ -104,7 +104,18 @@ Run .exe
 > .\SimulationFinalCovid19
 
 </details>
+<details>
+<summary>Simulation Model and images</summary>
 
 ![SLIDES - 1](https://user-images.githubusercontent.com/6078810/82042681-fbbc7b00-96b2-11ea-8ff8-81548ece57c4.jpg)
 
 ![SLIDES - 2](https://user-images.githubusercontent.com/6078810/82042792-2a3a5600-96b3-11ea-84e3-8209693b83af.jpg)
+
+</details>
+
+<details>
+<summary>Example run </summary>
+
+<div style="width:500px;max-width:100%;"><div style="height:0;padding-bottom:58.6%;position:relative;"><iframe width="500" height="293" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameBorder="0" src="https://imgflip.com/embed/41k08t"></iframe></div><p><a href="https://imgflip.com/gif/41k08t">via Imgflip</a></p></div>
+
+</details>
