@@ -156,11 +156,15 @@ void Simulation::PromtUser(vector<vector<LinkedList<Cordinates *> *>> &Users, ve
     Functions functions;
     menu.PromtForFunctions();
     int timeInterval = 900;
+
+    //run the possible infection for all the users inside the simulation
+
     for (int i = 1; i < Users.size(); i++)
     {
         if (ListOfCovid19[i] == 0)
             functions.POSSIBLE_COVID_19_INFECTION(Users[Day], Users[Day][i], ListOfCovid19, i);
     }
+    //save the listofcovid results into a vector
     int value;
     cin >> value;
     switch (value)
@@ -189,6 +193,9 @@ void Simulation::PromtUser(vector<vector<LinkedList<Cordinates *> *>> &Users, ve
     case 2:
         break;
     case 3:
+        dontPromtUser = 1;
+        break;
+    case 4:
         exit(0);
     default:
         break;
@@ -223,7 +230,8 @@ void Simulation::Simulate()
         functions.POSSIBLE_COVID_19_INFECTION(Users[Day], Users[Day][0], ListOfCovid19, 0) ? cout << "Infected" : cout << "Not infected";
 
         simulation.SummarizeData(Users, Day);
-        simulation.PromtUser(Users, ListOfCovid19, Day);
+        if (simulation.dontPromtUser == 0)
+            simulation.PromtUser(Users, ListOfCovid19, Day);
         Day += 1;
     }
     cout << "User was infected on day: " << Day;

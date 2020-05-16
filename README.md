@@ -118,4 +118,41 @@ Run .exe
 
 ![output_NrQbLv](https://user-images.githubusercontent.com/6078810/82045455-c9f9e300-96b7-11ea-85e2-fe449234ef08.gif)
 
+> Example Screenshots in case gif isnt good quality
+
+You can see here in our first screenshot , we run make clean to delete previous complied files and we run make again to produce our new excecutable.
+After our new exe is made we run SimulationFinalCovid19.
+We give some information about our app starts.
+At the start two vectors are produced. One is the vector of Users which is a vector of vectors which point to a list which represent the User Trajectory of every user in each Day and the other a vector of bools which represents the list of all the covid 19 infected and uninfected users by 0 for unifected and 1 for infected.
+Each vector Day which is pushed back in the users vectors produces a day random generated for all the MAX_USERS defined in the simulation.h where ebery User Trajectory a linked list is producced like this:
+
+Our application produces a random starting point for every user by using run and it moves inside the DxD Area defined in simulation.h . After every 30 sec the simulation continues in 2 cases.
+
+         1) RandomCordinates is called and the previous moving Cordinates are increment or disincrement by a given speed or
+         2) No new Node is inserted in the list in order to simulate the gps lose singal
+
+This procedures goes on until the DAY ends.After the end of the day for every list generated we call REPAIR functions which takes on to fill in the lost nodes froom the UserTrajectory. Then The list or every user is pushed back in vector which represents the day and in the end its returned through the function GenerateDay to the users vector.
+For a visual represantaion of the models used check
+
+> Simulation Model and Images
+
+After the day is produced we run POSSIBLE_COVID_19 method which scan all the given list of the current day in order to find if our User (user0) was found inside an area of an infected one.
+
+The program then continues by promting user to choose from a menu of options , but before that it runs the simulation for every user in the User on the current day , and then the menuu is displayed:
+
+      1)Run CROWED PLACES
+      2)Continue to the next day
+      3)Dont promt User again
+      4)Exit the simulation
+
+If 4 days has passed the application calls the method SUMMARIZE_DATA and deletes all the nodes of every list in the previous 4 days that are found inside the same diamater from the previous one in order to save data.
+
+The programm ends when the user gets infecetd!
+
+![Screenshot (2)](https://user-images.githubusercontent.com/6078810/82118643-3e4c8900-9781-11ea-995c-8a409c8b5b6f.png)
+
+![Screenshot (3)](https://user-images.githubusercontent.com/6078810/82119060-0d218800-9784-11ea-9841-2371795afc1f.png)
+
+![Screenshot (5)](https://user-images.githubusercontent.com/6078810/82119064-17438680-9784-11ea-8ed8-0ecc355fecd3.png)
+
 </details>
